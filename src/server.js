@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('./utils/logger');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 5002;
@@ -12,7 +13,7 @@ app.get('/', (req, res, next) => {
 
 const start = () => {
     app.listen(PORT, () => {
-        console.log(`Server is running on PORT: ${PORT}`);
+        logger.info(`Server is running on PORT: ${PORT}`);
     });
 };
 
