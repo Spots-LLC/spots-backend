@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/auth');
 
 // error handlers
 const notFound = require('./handlers/404');
@@ -19,6 +20,8 @@ app.get('/', (req, res, next) => {
 app.get('/error', (req, res, next) => {
     throw new Error('Forced Error for Testing');
 });
+
+app.use(authRoutes);
 
 app.use('*', notFound);
 app.use(errorHandler);

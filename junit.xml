@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="0" errors="0" time="0.895">
-  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:40:56" time="0.722" tests="4">
-    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.007">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="0.905">
+  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:56" time="0.485" tests="4">
+    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.008">
     </testcase>
-    <testcase classname="Server Tests should connect to MongoDB" name="Server Tests should connect to MongoDB" time="0">
+    <testcase classname="Server Tests should connect to MongoDB" name="Server Tests should connect to MongoDB" time="0.001">
     </testcase>
     <testcase classname="Server Tests logs a successful connection to MongoDB" name="Server Tests logs a successful connection to MongoDB" time="0.001">
     </testcase>
     <testcase classname="Server Tests logs an error if MongoDB connection fails" name="Server Tests logs an error if MongoDB connection fails" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:40:56" time="0.071" tests="1">
-    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.006">
+  <testsuite name="POST /register" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:56" time="0.162" tests="3">
+    <testcase classname="POST /register should register a new user successfully" name="POST /register should register a new user successfully" time="0.009">
+    </testcase>
+    <testcase classname="POST /register should fail registration with existing email" name="POST /register should fail registration with existing email" time="0.002">
+    </testcase>
+    <testcase classname="POST /register should handle errors during registration" name="POST /register should handle errors during registration" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:40:56" time="0.07" tests="1">
+  <testsuite name="POST /login" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.09" tests="4">
+    <testcase classname="POST /login should log in a user successfully" name="POST /login should log in a user successfully" time="0.005">
+    </testcase>
+    <testcase classname="POST /login should fail login with non-existent user" name="POST /login should fail login with non-existent user" time="0.001">
+    </testcase>
+    <testcase classname="POST /login should fail login with incorrect password" name="POST /login should fail login with incorrect password" time="0.001">
+    </testcase>
+    <testcase classname="POST /login should handle errors during login" name="POST /login should handle errors during login" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.071" tests="1">
+    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.066" tests="1">
     <testcase classname="404 notFound Handler Tests should return 404 for non-existent route" name="404 notFound Handler Tests should return 404 for non-existent route" time="0.003">
     </testcase>
   </testsuite>
