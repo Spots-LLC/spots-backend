@@ -31,6 +31,7 @@
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "jest-junit": "^16.0.0"
+    "jest-junit": "^16.0.0",
+    "mongodb-memory-server": "^9.1.4"
   }
 }
