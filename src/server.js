@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('./utils/logger');
+const mongoose = require('mongoose');
 
 // error handlers
 const notFound = require('./handlers/404');
@@ -22,10 +23,19 @@ app.get('/error', (req, res, next) => {
 app.use('*', notFound);
 app.use(errorHandler);
 
-const start = () => {
-    app.listen(PORT, () => {
-        logger.info(`Server is running on PORT: ${PORT}`);
-    });
+const start = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL, {
+            // options will be addead as db features are added. 
+        });
+        logger.info('Connected to MongoDB');
+
+        app.listen(PORT, () => {
+            logger.info(`Server is running on PORT: ${PORT}`);
+        });
+    } catch (e) {
+        logger.error(`Error connecting to MongoDB: ${e.message}`);
+    }
 };
 
 module.exports = { app, start };
