@@ -17,6 +17,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Set up environment variables
+      run: |
+        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
+      env:
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
     - name: npm install, build, and test
       run: |
         npm i
