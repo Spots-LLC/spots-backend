@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="0.91">
+  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:39:28" time="0.735" tests="4">
+    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.007">
+    </testcase>
+    <testcase classname="Server Tests should connect to MongoDB" name="Server Tests should connect to MongoDB" time="0">
+    </testcase>
+    <testcase classname="Server Tests logs a successful connection to MongoDB" name="Server Tests logs a successful connection to MongoDB" time="0.001">
+    </testcase>
+    <testcase classname="Server Tests logs an error if MongoDB connection fails" name="Server Tests logs an error if MongoDB connection fails" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:39:29" time="0.071" tests="1">
+    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T19:39:29" time="0.07" tests="1">
+    <testcase classname="404 notFound Handler Tests should return 404 for non-existent route" name="404 notFound Handler Tests should return 404 for non-existent route" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>

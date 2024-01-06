@@ -1,4 +1,10 @@
 const express = require('express');
+const logger = require('./utils/logger');
+const mongoose = require('mongoose');
+
+// error handlers
+const notFound = require('./handlers/404');
+const errorHandler = require('./handlers/500');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 5002;
@@ -10,10 +16,26 @@ app.get('/', (req, res, next) => {
     res.status(200).send('Hello World!');
 });
 
-const start = () => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on PORT: ${PORT}`);
-    });
+app.get('/error', (req, res, next) => {
+    throw new Error('Forced Error for Testing');
+});
+
+app.use('*', notFound);
+app.use(errorHandler);
+
+const start = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL, {
+            // options will be addead as db features are added. 
+        });
+        logger.info('Connected to MongoDB');
+
+        app.listen(PORT, () => {
+            logger.info(`Server is running on PORT: ${PORT}`);
+        });
+    } catch (e) {
+        logger.error(`Error connecting to MongoDB: ${e.message}`);
+    }
 };
 
 module.exports = { app, start };
