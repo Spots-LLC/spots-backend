@@ -7,15 +7,6 @@ const router = express.Router();
 
 const userCollection = new Collection(User);
 
-// Create a new User
-router.post('/user', async (req, res) => {
-    try {
-        const newUser = await userCollection.create(req.body);
-        res.status(201).json(newUser);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-})
 
 // fetch all users
 router.get('/users', async (req, res) => {
