@@ -3,6 +3,7 @@ const logger = require('./utils/logger');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const eventRoutes = require('./routes/event');
 
 // error handlers
 const notFound = require('./handlers/404');
@@ -26,6 +27,7 @@ app.get('/error', (req, res, next) => {
 
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(eventRoutes);
 
 app.use('*', notFound);
 app.use(errorHandler);
