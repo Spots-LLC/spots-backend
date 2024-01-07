@@ -1,39 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="13" failures="0" errors="0" time="0.905">
-  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:56" time="0.485" tests="4">
-    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.008">
+<testsuites name="jest tests" tests="3" failures="2" errors="0" time="5.935">
+  <testsuite name="verifyToken Middleware" errors="0" failures="2" skipped="0" timestamp="2024-01-07T17:07:17" time="5.901" tests="3">
+    <testcase classname="verifyToken Middleware should grant access with valid token" name="verifyToken Middleware should grant access with valid token" time="5.007">
+      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a test.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at it (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:30:5)
+    at _dispatchDescribe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/index.js:55:5)
+    at Object.describe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:10:1)
+    at Runtime._execModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at runTestInternal (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runner/build/runTest.js:444:34)</failure>
     </testcase>
-    <testcase classname="Server Tests should connect to MongoDB" name="Server Tests should connect to MongoDB" time="0.001">
+    <testcase classname="verifyToken Middleware should deny access without token" name="verifyToken Middleware should deny access without token" time="0.01">
     </testcase>
-    <testcase classname="Server Tests logs a successful connection to MongoDB" name="Server Tests logs a successful connection to MongoDB" time="0.001">
-    </testcase>
-    <testcase classname="Server Tests logs an error if MongoDB connection fails" name="Server Tests logs an error if MongoDB connection fails" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="POST /register" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:56" time="0.162" tests="3">
-    <testcase classname="POST /register should register a new user successfully" name="POST /register should register a new user successfully" time="0.009">
-    </testcase>
-    <testcase classname="POST /register should fail registration with existing email" name="POST /register should fail registration with existing email" time="0.002">
-    </testcase>
-    <testcase classname="POST /register should handle errors during registration" name="POST /register should handle errors during registration" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="POST /login" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.09" tests="4">
-    <testcase classname="POST /login should log in a user successfully" name="POST /login should log in a user successfully" time="0.005">
-    </testcase>
-    <testcase classname="POST /login should fail login with non-existent user" name="POST /login should fail login with non-existent user" time="0.001">
-    </testcase>
-    <testcase classname="POST /login should fail login with incorrect password" name="POST /login should fail login with incorrect password" time="0.001">
-    </testcase>
-    <testcase classname="POST /login should handle errors during login" name="POST /login should handle errors during login" time="0.002">
-    </testcase>
-  </testsuite>
-  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.071" tests="1">
-    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-06T22:15:57" time="0.066" tests="1">
-    <testcase classname="404 notFound Handler Tests should return 404 for non-existent route" name="404 notFound Handler Tests should return 404 for non-existent route" time="0.003">
+    <testcase classname="verifyToken Middleware should deny access with invalid token" name="verifyToken Middleware should deny access with invalid token" time="0.008">
+      <failure>Error: expect(received).toEqual(expected) // deep equality
+
+Expected: 403
+Received: 500
+    at Object.toEqual (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:56:32)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</failure>
     </testcase>
   </testsuite>
 </testsuites>
