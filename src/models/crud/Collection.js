@@ -27,10 +27,9 @@ class Collection {
         try {
             let record = null;
             if (id) {
-                options.where = { ...options.where, id: id };
-                record = await this.model.findOne(options);
+                record = await this.model.findById(id, options);
             } else {
-                record = await this.model.findAll(options);
+                record = await this.model.find(options);
             }
             logger.info('Read operation was successful', { record });
             return record;
@@ -41,9 +40,9 @@ class Collection {
 
     async update(id, json) {
         try {
-            const recordToUpdate = await this.model.findByPk(id);
+            const recordToUpdate = await this.model.findById(id);
             if (recordToUpdate) {
-                await recordToUpdate.update(json);
+                await recordToUpdate.set(json).save();
                 logger.info('Record updated successfully', { id });
                 return recordToUpdate;
             } else {
@@ -56,7 +55,7 @@ class Collection {
 
     async delete(id) {
         try {
-            const result = await this.model.destroy({ where: { id: id } });
+            const result = await this.model.findByIdAndDelete(id);
             if (result) {
                 logger.info('Record deleted successfully', { id });
                 return { message: 'Record deleted successfully' };
