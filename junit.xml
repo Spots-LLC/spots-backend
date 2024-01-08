@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="2" errors="0" time="5.935">
-  <testsuite name="verifyToken Middleware" errors="0" failures="2" skipped="0" timestamp="2024-01-07T17:07:17" time="5.901" tests="3">
-    <testcase classname="verifyToken Middleware should grant access with valid token" name="verifyToken Middleware should grant access with valid token" time="5.007">
-      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a test.
-Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
-    at it (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:30:5)
-    at _dispatchDescribe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/index.js:91:26)
-    at describe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/index.js:55:5)
-    at Object.describe (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:10:1)
-    at Runtime._execModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:1439:24)
-    at Runtime._loadModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:1022:12)
-    at Runtime.requireModule (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runtime/build/index.js:882:12)
-    at jestAdapter (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at runTestInternal (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runner/build/runTest.js:367:16)
-    at runTest (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/node_modules/jest-runner/build/runTest.js:444:34)</failure>
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="0.674">
+  <testsuite name="Restaurant Routes" errors="0" failures="0" skipped="0" timestamp="2024-01-08T03:17:51" time="0.65" tests="5">
+    <testcase classname="Restaurant Routes should create a new restaurant" name="Restaurant Routes should create a new restaurant" time="0.023">
     </testcase>
-    <testcase classname="verifyToken Middleware should deny access without token" name="verifyToken Middleware should deny access without token" time="0.01">
+    <testcase classname="Restaurant Routes should fetch all restaurants" name="Restaurant Routes should fetch all restaurants" time="0.006">
     </testcase>
-    <testcase classname="verifyToken Middleware should deny access with invalid token" name="verifyToken Middleware should deny access with invalid token" time="0.008">
-      <failure>Error: expect(received).toEqual(expected) // deep equality
-
-Expected: 403
-Received: 500
-    at Object.toEqual (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/verifyToken.test.js:56:32)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)</failure>
+    <testcase classname="Restaurant Routes should fetch a specific restaurant by ID" name="Restaurant Routes should fetch a specific restaurant by ID" time="0.006">
+    </testcase>
+    <testcase classname="Restaurant Routes should update a specific restaurant by ID" name="Restaurant Routes should update a specific restaurant by ID" time="0.007">
+    </testcase>
+    <testcase classname="Restaurant Routes should delete a specific restaurant by ID" name="Restaurant Routes should delete a specific restaurant by ID" time="0.008">
     </testcase>
   </testsuite>
 </testsuites>

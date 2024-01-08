@@ -56,20 +56,16 @@ class Collection {
     async delete(id) {
         try {
             const result = await this.model.findByIdAndDelete(id);
-            if (result) {
-                logger.info('Record deleted successfully', { id });
-                return { message: 'Record deleted successfully' };
-            } else {
+            if (!result) {
                 throw new Error('Record not found or not deleted');
             }
+            logger.info('Record deleted successfully', { id });
+            return { message: 'Record deleted successfully' };
         } catch (e) {
-            if (e.message !== 'Record not found or not deleted') {
-                this.handleError('delete', e);
-            } else {
-                throw e;
-            }
+            this.handleError('delete', e);
         }
     }
+    
 
 
 
