@@ -1,7 +1,9 @@
 const io = require('socket.io-client');
 
+require('dotenv').config({ path: '../../.env'});
+const PORT = process.env.PORT || 5002;
 
-const socket = io('http://localhost:3001');
+const socket = io(`http://localhost:${PORT}`);
 
 socket.on('connect', () => {
     console.log('Connected to server');
