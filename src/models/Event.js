@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const EventCategories = require('../data/eventCategories');
 
 const eventSchema = new mongoose.Schema({
     name: {
@@ -28,23 +29,7 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        enum: [
-            'music', 
-            'tech', 
-            'yoga', 
-            'concert', 
-            'art', 
-            'workout',
-            'cooking class',
-            'dance class',
-            'language class',
-            'photography workshop',
-            'fitness class',
-            'educational seminar',
-            'business workshop',
-            'outdoor activity',
-            'community gathering',
-        ],
+        enum: EventCategories,
     },
     
     organizer: {

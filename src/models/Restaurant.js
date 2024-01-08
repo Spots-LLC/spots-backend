@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const CuisineTypes = require('../data/cuisineTypes');
 
 const restaurantSchema = new mongoose.Schema({
     name: {
@@ -14,6 +15,7 @@ const restaurantSchema = new mongoose.Schema({
     cuisineType: {
         type: String,
         required: true,
+        enum: CuisineTypes,
         trim: true,
     },
     rating: {
