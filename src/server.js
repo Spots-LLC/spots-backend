@@ -1,4 +1,6 @@
 const express = require('express');
+const http = require('http');
+const socketio = require('socket.io');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
@@ -36,6 +38,21 @@ app.use(restaurantRoutes);
 app.use('*', notFound);
 app.use(errorHandler);
 
+const server = http.createServer(app);
+const io = socketio(server);
+
+io.on('connection', (socket) => {
+    logger.info('A user connected to socket.io');
+
+    socket.on('register-user', (data) => {
+        logger.info(`New user registered: ${data.username}`);
+    });
+
+    socket.on('disconnect', () => {
+        logger.info('User disconnected');
+    });
+});
+
 const start = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
@@ -43,7 +60,7 @@ const start = async () => {
         });
         logger.info('Connected to MongoDB');
 
-        app.listen(PORT, () => {
+        server.listen(PORT, () => {
             logger.info(`Server is running on PORT: ${PORT}`);
         });
     } catch (e) {
