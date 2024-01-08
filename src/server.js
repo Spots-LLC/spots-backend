@@ -41,15 +41,32 @@ app.use(errorHandler);
 const server = http.createServer(app);
 const io = socketio(server);
 
-io.on('connection', (socket) => {
-    logger.info('A user connected to socket.io');
+// '/online' namespace. 
+const online = io.of('/online');
 
-    socket.on('register-user', (data) => {
-        logger.info(`New user registered: ${data.username}`);
+io.on('connection', (socket) => {
+    logger.info('A user connected to /online');
+
+    // joining a room 
+    socket.on('joinRoom', ({ clientId, roomId }) => {
+        socket.join(roomId);
+        logger.info(`${clientId} joined room: ${roomId}`);
+    });
+
+    // leaving a room
+    socket.on('leaveRoom', ({ clientId, roomId }) => {
+        socket.leave(roomId);
+        logger.info(`${clientId} left room: ${roomId}`);
+    });
+
+    // handling messages
+    socket.on('message', ({ clientId, roomId, message }) => {
+        online.to(roomId).emit('message', { clientId, message });
+        logger.info(`Message from ${clientId} in room ${roomId}: ${message}`);
     });
 
     socket.on('disconnect', () => {
-        logger.info('User disconnected');
+        logger.info('User disconnected from /online');
     });
 });
 
