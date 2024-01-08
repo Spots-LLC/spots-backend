@@ -5,6 +5,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const eventRoutes = require('./routes/event');
 const preferencesRoutes = require('./routes/preferences');
+const restaurantRoutes = require('./routes/restaurant');
 
 // error handlers
 const notFound = require('./handlers/404');
@@ -30,6 +31,7 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(eventRoutes);
 app.use(preferencesRoutes);
+app.use(restaurantRoutes);
 
 app.use('*', notFound);
 app.use(errorHandler);
