@@ -12,13 +12,14 @@ const register = async (req, res, next) => {
             password,
             role,
             location,
+            firstName,  
+            lastName,   
         } = req.body;
 
         const existingUser = await User.findOne({ email: email });
         if (existingUser) {
             return res.status(400).json({ message: 'Email already in use. ' });
         }
-
 
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, salt);
@@ -29,6 +30,8 @@ const register = async (req, res, next) => {
             password: passwordHash,
             role,
             location,
+            firstName,  
+            lastName,  
         });
 
         const savedUser = await newUser.save();

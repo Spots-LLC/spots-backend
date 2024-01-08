@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const CuisineTypes = require('../data/cuisineTypes');
+const EventCategories = require('../data/eventCategories');
+const Interests = require('../data/interests');
 
 const preferencesSchema = new mongoose.Schema({
     user: {
@@ -10,45 +13,17 @@ const preferencesSchema = new mongoose.Schema({
     interests: [{
         type: String,
         required: true,
-        enum: [
-            'sports',
-            'music',
-            'tech',
-            'art',
-            'travel',
-            'literature'],
+        enum: Interests,
     }],
-    foodPreferences: [{
+    cuisinePreferences: [{
         type: String,
         required: true,
-        enum: [
-            'vegan',
-            'vegetarian',
-            'gluten-free',
-            'halal',
-            'kosher',
-            'no restrictions'],
+        enum: CuisineTypes,
     }],
     eventPreferences: [{
         type: String,
         required: true,
-        enum: [
-            'music',
-            'tech',
-            'yoga',
-            'concert',
-            'art',
-            'workout',
-            'cooking class',
-            'dance class',
-            'language class',
-            'photography workshop',
-            'fitness class',
-            'educational seminar',
-            'business workshop',
-            'outdoor activity',
-            'community gathering',
-        ],
+        enum: EventCategories,
     }],
 });
 
