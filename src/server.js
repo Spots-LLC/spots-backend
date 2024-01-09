@@ -9,6 +9,8 @@ const userRoutes = require('./routes/user');
 const eventRoutes = require('./routes/event');
 const preferencesRoutes = require('./routes/preferences');
 const restaurantRoutes = require('./routes/restaurant');
+// const restaurants = require('./data/restaurants');
+// const Restaurant = require('./models/Restaurant');
 
 const notFound = require('./handlers/404');
 const errorHandler = require('./handlers/500');
@@ -97,6 +99,11 @@ const start = async () => {
             // MongoDB connection options
         });
         logger.info('Connected to MongoDB');
+
+        // Uncomment to quickly add data to database if needed. 
+
+        // await Restaurant.insertMany(restaurants);
+        // logger.info('Restaurants added to Database');
 
         server.listen(PORT, () => {
             logger.info(`Server is running on PORT: ${PORT}`);
