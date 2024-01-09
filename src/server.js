@@ -3,13 +3,13 @@ const http = require('http');
 const socketio = require('socket.io');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
+const User = require('./models/User');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const eventRoutes = require('./routes/event');
 const preferencesRoutes = require('./routes/preferences');
 const restaurantRoutes = require('./routes/restaurant');
 
-// error handlers
 const notFound = require('./handlers/404');
 const errorHandler = require('./handlers/500');
 
@@ -27,13 +27,16 @@ app.get('/error', (req, res, next) => {
     throw new Error('Forced Error for Testing');
 });
 
-
-
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(eventRoutes);
 app.use(preferencesRoutes);
 app.use(restaurantRoutes);
+
+// Route to get connected Users
+app.get('/socketUsers', (req, res) => {
+    res.json(connectedUsers);
+});
 
 app.use('*', notFound);
 app.use(errorHandler);
@@ -41,39 +44,57 @@ app.use(errorHandler);
 const server = http.createServer(app);
 const io = socketio(server);
 
-// '/online' namespace. 
-const online = io.of('/online');
+io.use(async (socket, next) => {
+    const username = socket.handshake.auth.username;
 
-io.on('connection', (socket) => {
-    logger.info('A user connected to /online');
+    try {
+        const user = await User.findOne({ username: username });
+        if (!user) {
+            return next(new Error('Username does not exist'));
+        }
 
-    // joining a room 
-    socket.on('joinRoom', ({ clientId, roomId }) => {
-        socket.join(roomId);
-        logger.info(`${clientId} joined room: ${roomId}`);
-    });
-
-    // leaving a room
-    socket.on('leaveRoom', ({ clientId, roomId }) => {
-        socket.leave(roomId);
-        logger.info(`${clientId} left room: ${roomId}`);
-    });
-
-    // handling messages
-    socket.on('message', ({ clientId, roomId, message }) => {
-        online.to(roomId).emit('message', { clientId, message });
-        logger.info(`Message from ${clientId} in room ${roomId}: ${message}`);
-    });
-
-    socket.on('disconnect', () => {
-        logger.info('User disconnected from /online');
-    });
+        socket.username = username;
+        next();
+    } catch (error) {
+        next(new Error('Server error during authentication'));
+    }
 });
+
+let connectedUsers = [];
+
+
+io.on('connection', async (socket) => {
+    const username = socket.username;
+    connectedUsers.push({ userID: socket.id, username: username });
+    try {
+        // Fetch existing users from database
+        const users = await User.find({}).select('username _id');
+        socket.emit('users', users.map(user => ({ userID: user._id, username: user.username })));
+    } catch (error) {
+        logger.error(`Error fetching users: ${error.message}`);
+    }
+
+    // Notify existing users
+    socket.broadcast.emit('user connected', {
+        userID: socket.id,
+        username: socket.username,
+    });
+
+    // Notify users upon disconnection
+    socket.on('disconnect', () => {
+        connectedUsers = connectedUsers.filter(user => user.userID !== socket.id);
+        socket.broadcast.emit('user disconnected', socket.id);
+        socket.broadcast.emit('user disconnected', socket.id);
+    });
+
+});
+
+
 
 const start = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
-            // options will be addead as db features are added. 
+            // MongoDB connection options
         });
         logger.info('Connected to MongoDB');
 
