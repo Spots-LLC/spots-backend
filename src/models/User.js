@@ -16,20 +16,20 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 5, 
+        minlength: 5,
     },
-    firstName: { 
+    firstName: {
         type: String,
         required: true,
         trim: true,
     },
-    lastName: {  
+    lastName: {
         type: String,
         required: true,
         trim: true,
     },
     role: {
-        type: [String],
+        type: String,
         required: true,
         enum: ['attendee', 'organizer'],
     },
