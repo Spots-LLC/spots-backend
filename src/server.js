@@ -65,31 +65,26 @@ io.use(async (socket, next) => {
 let connectedUsers = [];
 
 
-io.on('connection', async (socket) => {
+io.on('connection', (socket) => {
     const username = socket.username;
     connectedUsers.push({ userID: socket.id, username: username });
-    try {
-        // Fetch existing users from database
-        const users = await User.find({}).select('username _id');
-        socket.emit('users', users.map(user => ({ userID: user._id, username: user.username })));
-    } catch (error) {
-        logger.error(`Error fetching users: ${error.message}`);
-    }
+
+    // Emit currently connected users
+    socket.emit('users', connectedUsers);
 
     // Notify existing users
     socket.broadcast.emit('user connected', {
         userID: socket.id,
-        username: socket.username,
+        username: username,
     });
 
-    // Notify users upon disconnection
+    // Handle disconnection
     socket.on('disconnect', () => {
         connectedUsers = connectedUsers.filter(user => user.userID !== socket.id);
         socket.broadcast.emit('user disconnected', socket.id);
-        socket.broadcast.emit('user disconnected', socket.id);
     });
-
 });
+
 
 
 
