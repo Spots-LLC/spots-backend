@@ -73,16 +73,33 @@ io.on('connection', (socket) => {
     socket.emit('users', connectedUsers);
 
     // Notify existing users
-    socket.broadcast.emit('user connected', {
-        userID: socket.id,
-        username: username,
+    socket.broadcast.emit('user connected', `${username} is online`);
+
+    // creates chat room
+    const room = 'chatroom';
+    socket.join(room);
+
+    // Welcome message to the user
+    socket.to(room).emit('message', `${socket.username} is in the chatroom!`);
+
+    socket.on('joinRoom', ({ username, room }) => {
+        socket.join(room);
+        socket.to(room).emit('message', `${username} joined ${room}`);
+    });
+
+    socket.on('message', ({ room, message }) => {
+        socket.to(room).emit('message', message);
     });
 
     // Handle disconnection
+    // Handle disconnection
     socket.on('disconnect', () => {
         connectedUsers = connectedUsers.filter(user => user.userID !== socket.id);
-        socket.broadcast.emit('user disconnected', socket.id);
+        const room = 'chatroom';
+        io.in(room).emit('message', `${username} has disconnected.`);
+        socket.broadcast.emit('user disconnected', `${username} has disconnected`);
     });
+
 });
 
 

@@ -14,29 +14,14 @@ class SocketClient {
         
         
 
-        this.socket.on('user connected', (user) => {
-            logger.info('User connected:', user);
+        this.socket.on('user connected', (message) => {
+            logger.info(message);
         });
 
-        this.socket.on('user disconnected', (userId) => {
-            logger.info('User disconnected:', userId);
+        this.socket.on('user disconnected', (message) => {
+            logger.info(message);
         });
-    }
-
-    subscribe(event, callback) {
-        this.socket.on(event, callback);
-        logger.debug(`Subscribed to event: ${event}`);
-    }
-
-   
-    // Method to handle receiving the list of users
-    onUsersList(callback) {
-        this.subscribe('users', callback);
-    }
-
-    // Method to handle user connection notifications
-    onUserConnected(callback) {
-        this.subscribe('user connected', callback);
+        
     }
 }
 
