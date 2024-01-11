@@ -1,13 +1,17 @@
 const express = require('express');
+const http = require('http');
+const socketio = require('socket.io');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
+const User = require('./models/User');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const eventRoutes = require('./routes/event');
 const preferencesRoutes = require('./routes/preferences');
 const restaurantRoutes = require('./routes/restaurant');
+// const restaurants = require('./data/restaurants');
+// const Restaurant = require('./models/Restaurant');
 
-// error handlers
 const notFound = require('./handlers/404');
 const errorHandler = require('./handlers/500');
 
@@ -25,25 +29,95 @@ app.get('/error', (req, res, next) => {
     throw new Error('Forced Error for Testing');
 });
 
-
-
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(eventRoutes);
 app.use(preferencesRoutes);
 app.use(restaurantRoutes);
 
+// Route to get connected Users
+app.get('/socketUsers', (req, res) => {
+    res.json(connectedUsers);
+});
+
 app.use('*', notFound);
 app.use(errorHandler);
+
+const server = http.createServer(app);
+const io = socketio(server);
+
+io.use(async (socket, next) => {
+    const username = socket.handshake.auth.username;
+
+    try {
+        const user = await User.findOne({ username: username });
+        if (!user) {
+            return next(new Error('Username does not exist'));
+        }
+
+        socket.username = username;
+        next();
+    } catch (error) {
+        next(new Error('Server error during authentication'));
+    }
+});
+
+let connectedUsers = [];
+
+
+io.on('connection', (socket) => {
+    const username = socket.username;
+    connectedUsers.push({ userID: socket.id, username: username });
+
+    // Emit currently connected users
+    socket.emit('users', connectedUsers);
+
+    // Notify existing users
+    socket.broadcast.emit('user connected', `${username} is online`);
+
+    // creates chat room
+    const room = 'chatroom';
+    socket.join(room);
+
+    // Welcome message to the user
+    socket.to(room).emit('message', `${socket.username} is in the chatroom!`);
+
+    socket.on('joinRoom', ({ username, room }) => {
+        socket.join(room);
+        socket.to(room).emit('message', `${username} joined ${room}`);
+    });
+
+    socket.on('message', ({ room, message }) => {
+        socket.to(room).emit('message', message);
+    });
+
+    // Handle disconnection
+    // Handle disconnection
+    socket.on('disconnect', () => {
+        connectedUsers = connectedUsers.filter(user => user.userID !== socket.id);
+        const room = 'chatroom';
+        io.in(room).emit('message', `${username} has disconnected.`);
+        socket.broadcast.emit('user disconnected', `${username} has disconnected`);
+    });
+
+});
+
+
+
 
 const start = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
-            // options will be addead as db features are added. 
+            // MongoDB connection options
         });
         logger.info('Connected to MongoDB');
 
-        app.listen(PORT, () => {
+        // Uncomment to quickly add data to database if needed. 
+
+        // await Restaurant.insertMany(restaurants);
+        // logger.info('Restaurants added to Database');
+
+        server.listen(PORT, () => {
             logger.info(`Server is running on PORT: ${PORT}`);
         });
     } catch (e) {
