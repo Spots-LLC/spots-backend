@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.125">
-  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-08T04:33:24" time="0.693" tests="1">
-    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.015">
-    </testcase>
-  </testsuite>
-  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-08T04:33:24" time="0.693" tests="1">
-    <testcase classname="404 notFound Handler Tests should return 404 for non-existent route" name="404 notFound Handler Tests should return 404 for non-existent route" time="0.015">
-    </testcase>
-  </testsuite>
-  <testsuite name="POST /register" errors="0" failures="0" skipped="0" timestamp="2024-01-08T04:33:24" time="0.708" tests="3">
-    <testcase classname="POST /register should register a new user successfully" name="POST /register should register a new user successfully" time="0.024">
-    </testcase>
-    <testcase classname="POST /register should fail registration with existing email" name="POST /register should fail registration with existing email" time="0.002">
-    </testcase>
-    <testcase classname="POST /register should handle errors during registration" name="POST /register should handle errors during registration" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="POST /login" errors="0" failures="0" skipped="0" timestamp="2024-01-08T04:33:24" time="0.709" tests="4">
-    <testcase classname="POST /login should log in a user successfully" name="POST /login should log in a user successfully" time="0.021">
-    </testcase>
-    <testcase classname="POST /login should fail login with non-existent user" name="POST /login should fail login with non-existent user" time="0.004">
-    </testcase>
-    <testcase classname="POST /login should fail login with incorrect password" name="POST /login should fail login with incorrect password" time="0.002">
-    </testcase>
-    <testcase classname="POST /login should handle errors during login" name="POST /login should handle errors during login" time="0.002">
-    </testcase>
-  </testsuite>
-  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-08T04:33:24" time="1.011" tests="4">
-    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.013">
+<testsuites name="jest tests" tests="4" failures="1" errors="0" time="0.947">
+  <testsuite name="Server Tests" errors="0" failures="1" skipped="0" timestamp="2024-01-12T00:32:37" time="0.916" tests="4">
+    <testcase classname="Server Tests should return 200 for the home route" name="Server Tests should return 200 for the home route" time="0.007">
     </testcase>
     <testcase classname="Server Tests should connect to MongoDB" name="Server Tests should connect to MongoDB" time="0">
     </testcase>
     <testcase classname="Server Tests logs a successful connection to MongoDB" name="Server Tests logs a successful connection to MongoDB" time="0.001">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalled()
+
+Expected number of calls: &gt;= 1
+Received number of calls:    0
+    at Object.toHaveBeenCalled (/Users/brosmar18/SoftwareDev/DeltaV/code-401/labs/spotsLLC/spots-backend/__tests__/server.test.js:62:33)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)</failure>
     </testcase>
     <testcase classname="Server Tests logs an error if MongoDB connection fails" name="Server Tests logs an error if MongoDB connection fails" time="0.001">
     </testcase>
