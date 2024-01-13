@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="0.6">
-  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-12T01:15:14" time="0.576" tests="4">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="1.327">
+  <testsuite name="Server Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-13T00:27:29" time="0.918" tests="4">
     <testcase classname="Server Tests GET / responds with 200 and Hello World!" name="Server Tests GET / responds with 200 and Hello World!" time="0.008">
     </testcase>
-    <testcase classname="Server Tests GET /error responds with 500" name="Server Tests GET /error responds with 500" time="0.006">
+    <testcase classname="Server Tests GET /error responds with 500" name="Server Tests GET /error responds with 500" time="0.005">
     </testcase>
     <testcase classname="Server Tests logs a successful connection to MongoDB" name="Server Tests logs a successful connection to MongoDB" time="0.001">
     </testcase>
-    <testcase classname="Server Tests logs the server running port" name="Server Tests logs the server running port" time="0">
+    <testcase classname="Server Tests logs the server running port" name="Server Tests logs the server running port" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="POST /login" errors="0" failures="0" skipped="0" timestamp="2024-01-13T00:27:29" time="0.106" tests="4">
+    <testcase classname="POST /login should log in a user successfully" name="POST /login should log in a user successfully" time="0.011">
+    </testcase>
+    <testcase classname="POST /login should fail login with non-existent user" name="POST /login should fail login with non-existent user" time="0.002">
+    </testcase>
+    <testcase classname="POST /login should fail login with incorrect password" name="POST /login should fail login with incorrect password" time="0.002">
+    </testcase>
+    <testcase classname="POST /login should handle errors during login" name="POST /login should handle errors during login" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="POST /register" errors="0" failures="0" skipped="0" timestamp="2024-01-13T00:27:30" time="0.095" tests="3">
+    <testcase classname="POST /register should register a new user successfully" name="POST /register should register a new user successfully" time="0.007">
+    </testcase>
+    <testcase classname="POST /register should fail registration with existing email" name="POST /register should fail registration with existing email" time="0.001">
+    </testcase>
+    <testcase classname="POST /register should handle errors during registration" name="POST /register should handle errors during registration" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="404 notFound Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-13T00:27:30" time="0.082" tests="1">
+    <testcase classname="404 notFound Handler Tests should return 404 for non-existent route" name="404 notFound Handler Tests should return 404 for non-existent route" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="500 Internal Server Error Handler Tests" errors="0" failures="0" skipped="0" timestamp="2024-01-13T00:27:30" time="0.074" tests="1">
+    <testcase classname="500 Internal Server Error Handler Tests should return 500 for an internal server error" name="500 Internal Server Error Handler Tests should return 500 for an internal server error" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>
