@@ -6,7 +6,7 @@
 
 ## Problem Domain
 
-Spots, a backend application designed for both travel enthusiasts and locals, focuses on enriching the experience of exploring new places. The goal is to use a user's location to offer personalized recommendations for local events, restaurants, and tourists experiences. Built with Express, MongoDB, and socket.io, Spots aims to simplify the discovery of local attractions and activities, addressing the common challenge of quickly finding enjoyable and relevant experiences in a new area or even familiar surroundings.
+Spots, a backend application designed for both travel enthusiasts and locals, focuses on enriching the experience of exploring new places. The goal is to offer personalized recommendations for local events, restaurants, and tourists experiences. Built with Express, MongoDB, and socket.io, Spots aims to simplify the discovery of local attractions and activities, addressing the common challenge of quickly finding enjoyable and relevant experiences in a new area or even familiar surroundings.
 
 ## Links and Resources
 
